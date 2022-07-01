@@ -45,7 +45,7 @@
     switchBtn.addEventListener('click', function (event) {
         switchCamera();
     });
-    takePicBtn.addEventListener('click', function (event) {
+    function takePhoto() {
         var canvas = document.createElement('canvas');
         var ctx = canvas.getContext('2d');
         canvas.width = video.clientWidth;
@@ -53,6 +53,12 @@
         if (video)
             ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
         picture.prepend(canvas);
+    }
+    takePicBtn.addEventListener('click', function (event) {
+        takePhoto();
+    });
+    video.addEventListener('click', function () {
+        takePhoto();
     });
     function stopCamera() {
         videoStream.getTracks().forEach(function (track) {
