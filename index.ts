@@ -54,7 +54,7 @@
         switchCamera();
     })
 
-    takePicBtn.addEventListener('click', (event) => {
+    function takePhoto() {
         const canvas = document.createElement('canvas')
         const ctx = canvas.getContext('2d');
         canvas.width = video.clientWidth
@@ -63,6 +63,13 @@
             ctx?.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
 
         picture.prepend(canvas);
+    }
+    takePicBtn.addEventListener('click', (event) => {
+        takePhoto()
+    })
+
+    video.addEventListener('click', () => {
+        takePhoto()
     })
 
     function stopCamera() {
