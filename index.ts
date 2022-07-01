@@ -39,6 +39,7 @@
 
     function switchCamera() {
         front = !front;
+        video.style.transform = front ? 'scaleX(-1);' : 'scaleX(1);'
         startCamera();
     }
 
@@ -47,6 +48,9 @@
     })
 
     startBtn.addEventListener('click', (event) => {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        }
         startCamera();
     })
 

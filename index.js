@@ -34,12 +34,16 @@
     }
     function switchCamera() {
         front = !front;
+        video.style.transform = front ? 'scaleX(-1);' : 'scaleX(1);';
         startCamera();
     }
     stopBtn.addEventListener('click', function (event) {
         stopCamera();
     });
     startBtn.addEventListener('click', function (event) {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        }
         startCamera();
     });
     switchBtn.addEventListener('click', function (event) {
