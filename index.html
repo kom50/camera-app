@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+    <style>
+        * {
+            padding: 0;
+            /* margin: 0; */
+            /* box-sizing: border-box; */
+        }
+
+        #stream {
+            transform: scaleX(-1);
+        }
+
+        video,
+        canvas {
+            height: 600px;
+            width: 400px;
+            object-fit: cover;
+        }
+
+        .container {
+            position: sticky;
+            top: 1px;
+            z-index: 2;
+            background: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Camera</h1>
+        <button id="start"> Start video </button>
+        <button id="stop"> Stop video </button>
+        <button id="switch"> Switch camera </button>
+        <button id="takeBtn"> Take Photo </button>
+    </div>
+    <br>
+    <br>
+    <video src="" id="stream"></video>
+    <p>Pictures </p>
+    <div id="picture"></div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
