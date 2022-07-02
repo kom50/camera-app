@@ -9,7 +9,7 @@
 
 
     let videoStream: MediaStream;
-    let front = false; // for switch 
+    let front = false; // for switch camera
 
     function startCamera() {
         let constraints = {
@@ -21,9 +21,10 @@
         }
 
         if (typeof window.navigator) {
-            if (videoStream)
+            if (videoStream) {
                 stopCamera();
-            console.log(constraints)
+                video.style.transform = front ? 'scaleX(-1);' : 'scaleX(1);'
+            }
             window.navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
                 video.srcObject = stream;
                 videoStream = stream
@@ -36,10 +37,9 @@
             })
         }
     }
-
+    /* Function to switch camera between front and back camera */
     function switchCamera() {
         front = !front;
-        video.style.transform = front ? 'scaleX(-1);' : 'scaleX(1);'
         startCamera();
     }
 
@@ -58,16 +58,26 @@
         switchCamera();
     })
 
+    /* Function to take a photo, and download taken photo  */
     function takePhoto() {
         const canvas = document.createElement('canvas')
         const ctx = canvas.getContext('2d');
         canvas.width = video.clientWidth
         canvas.height = video.clientHeight
+        console.log(video.videoHeight, video.videoWidth)
+        console.log(video.clientWidth, video.clientHeight)
         if (video)
             ctx?.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
-
         picture.prepend(canvas);
+
+        // save image
+        const a = document.createElement('a');
+        a.download = 'om.jpeg'
+        a.href = canvas.toDataURL("image/jpeg");
+        a.click();
     }
+
+
     takePicBtn.addEventListener('click', (event) => {
         takePhoto()
     })
@@ -76,12 +86,12 @@
         takePhoto()
     })
 
+    /* Function to stop video */
     function stopCamera() {
         videoStream.getTracks().forEach(track => {
             track.stop()
         })
     }
-
+    // Start video 
     startCamera();
-
 })()
